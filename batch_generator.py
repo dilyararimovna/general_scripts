@@ -30,6 +30,10 @@ class BatchIteratorFromFasttext(object):
 
             self._cursor = 0
             self._epochs_done += 1
+            if self._shuffle:
+            	self._current_permutation = np.random.permutation(self._num_samples)
+            else:
+            	self._current_permutation = np.arange(self._num_samples)
             print("___%d epochs done___" % self._epochs_done)
         else:
             text_batch = self._data[self._current_permutation[self._cursor:self._cursor+self._batch_size]]
